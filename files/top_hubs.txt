@@ -1,0 +1,48 @@
+infosecurity|Информационная безопасность
+webdev|Веб-разработка
+javascript|JavaScript
+programming|Программирование
+the_future_is_here|Будущее здесь
+gdev|Game Development
+pm|Управление проектами
+DIY|DIY или Сделай Сам
+Dura_Lex|Dura Lex
+crazydev|Ненормальное программирование
+android|Android
+maths|Математика
+development|Разработка
+algorithms|Алгоритмы
+space|Космонавтика
+google|Google
+linux|Linux
+crypto|Криптография
+crowdfunding|Краудфандинг
+testing|Тестирование
+python|Python
+soft|Софт
+cpp|C++
+hardware|Железо
+css|CSS
+finance|Финансы для всех
+open_source|Open source
+image_processing|Обработка изображений
+easyelectronics|Электроника для начинающих
+mobiledev|Mobile Development
+smartphones|Смартфоны и коммуникаторы
+microsoft|Microsoft
+htranslations|Переводы
+sys_admin|Системное администрирование
+hi|Высокая производительность
+android_dev|Разработка под Android
+net|.NET
+robot|Робототехника
+study|Учебный процесс в IT
+web_design|Веб-дизайн
+history|История ИТ
+ui|Интерфейсы
+artificial_intelligence|Искусственный интеллект
+php|PHP
+design|Дизайн в IT
+java|JAVA
+os|Операционные системы
+html5|HTML
