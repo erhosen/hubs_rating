@@ -10,7 +10,6 @@ class HabraParser(Spider):
     initial_urls = ['http://habrahabr.ru/hubs/']
 
     def prepare(self):
-        print "Let's start parse all hubs from Habrahabr"
         self.post = []
         self.con = lite.connect('files/habra_hubss.db')
 
@@ -26,9 +25,12 @@ class HabraParser(Spider):
     def task_hub(self, grab, task):
         nav = grab.doc.select('//a[@class="next" and @id="next_page"]')
 
-        for elem in grab.doc.select('//div[@class="post shortcuts_item"]'):
+        for elem in grab.doc.select('//div[@class="posts shortcuts_items"]/div'):
+            if elem.attr('class') == 'ufo-was-here':
+                continue
             comments = ''
             score = ''
+            favs = ''
             post_url = elem.node.find('h1[@class="title"]/a').get('href')
             post_title = elem.node.find('h1[@class="title"]/a').text
             try:
@@ -41,9 +43,16 @@ class HabraParser(Spider):
             except:
                 score = 0
 
+            try:
+                favs = int(elem.node.find('.//div[@class="favs_count"]').text)
+            except:
+                favs = 0
+
+
             self.post.append([
                 score,
                 comments,
+                favs,
                 post_url,
                 post_title
             ])
@@ -58,9 +67,9 @@ class HabraParser(Spider):
         with self.con:
             self.cur = self.con.cursor()
             self.cur.execute("DROP TABLE IF EXISTS %s"%hub)
-            self.cur.execute("CREATE TABLE %s(Score INT, Comments INT, Url TEXT, PostTitle TEXT)"%hub)
+            self.cur.execute("CREATE TABLE %s(Score INT, Comments INT, Favs INT, Url TEXT, PostTitle TEXT)"%hub)
 
-            self.cur.executemany("INSERT INTO %s VALUES(?, ?, ?, ?)"%hub, self.post)
+            self.cur.executemany("INSERT INTO %s VALUES(?, ?, ?, ?, ?)"%hub, self.post)
 
         self.post = []
 
