@@ -6,12 +6,17 @@ import sqlite3 as lite
 
 def create_top(cur, hub, hub_name, j_file):
     result = []
-    result.append(u'<spoiler title="%s">' % hub_name)
+    result.append(u'<spoiler title="%s">\nПо количеству комментариев:' % hub_name)
     cur.execute("SELECT * FROM %s" % hub)
-    cur.execute("SELECT * FROM %s ORDER BY Score DESC LIMIT 10" % hub)
+    cur.execute("SELECT * FROM %s ORDER BY Comments DESC LIMIT 10" % hub)
     rating_rows = cur.fetchall()
     for row in rating_rows:
-        result.append("<a href='" + row[2] + "'>" + row[3] + "</a> " + "<b>" + str(row[0]) + "</b>")
+        result.append("<a href='" + row[3] + "'>" + row[4] + "</a> " + "<b>" + str(row[1]) + "</b>")
+    result.append(u'\nПо количеству добавлений в избранное')
+    cur.execute("SELECT * FROM %s ORDER BY Favs DESC LIMIT 10" % hub)
+    favs_rows = cur.fetchall()
+    for row in favs_rows:
+        result.append("<a href='" + row[3] + "'>" + row[4] + "</a> " + "<b>" + str(row[2]) + "</b>")
     result.append('</spoiler>')
     for item in result:
         j_file.write("%s\n" % item.encode('utf-8'))
@@ -21,7 +26,7 @@ def main():
     con = lite.connect('files/habra_hubs.db')
 
     o_file = open('files/top_hubs.txt').readlines()
-    j_file = open('files/result.html', 'w')
+    j_file = open('files/result4.html', 'w')
 
     with con:
 
